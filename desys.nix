@@ -15,7 +15,7 @@ let
       else let
         recursed = l.mapAttrs (_: iteration (cutoff - 1) system) fragment;
       in
-        if l.hasAttr "${system}" fragment
+        if l.hasAttr "${system}" (builtins.trace fragment fragment)
         then
           if l.isFunction fragment.${system}
           then recursed // {__functor = _: fragment.${system};}
